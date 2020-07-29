@@ -3,30 +3,12 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.2-apache-stretch-node-browsers
-    
-    working_directory: ~/internship_07_2020/back-end/
-
     steps:
       - checkout
-      # Install PHP Extension
-      - run: sudo apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng-dev && sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && sudo docker-php-ext-install -j$(nproc) gd pdo_mysql 
-      # - run: sudo docker-php-ext-install gd
-
-      # Download and cache dependencies
-      # Composer
-      - restore_cache:
-          name: Restore composer cache
-          keys:
-          - composer-{{ checksum "composer.json" }}
-          - composer-
+      - run: cd back-end
       - run: composer install -n --prefer-dist
-      - save_cache:
-          name: Store composer cache
-          key: composer-{{ checksum "composer.json" }}
-          paths:
-            - vendor
-      
-      # run tests!
+      # run tests!      
+      - run: ./vendor/bin/phpcs -n --standard=phpcs.xml
 
   deploy:
     machine:
