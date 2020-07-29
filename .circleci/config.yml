@@ -5,8 +5,8 @@ jobs:
       - image: circleci/php:7.2-apache-stretch-node-browsers
     steps:
       - checkout
-      - run: cd /back-end
       - run: ls
+      - run: cd ~/back-end
       - run: composer install -n --prefer-dist
       # run tests!      
       - run: ./vendor/bin/phpcs -n --standard=phpcs.xml
