@@ -5,8 +5,9 @@ jobs:
       - image: circleci/php:7.2-apache-stretch-node-browsers
     steps:
       - checkout
-      - run: ls
       - run: cd back-end/
+      - run: ls
+      - run: composer global require laravel/installer
       - run: composer install -n --prefer-dist
       # run tests!      
       - run: ./vendor/bin/phpcs -n --standard=phpcs.xml
