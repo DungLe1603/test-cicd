@@ -1,17 +1,5 @@
 version: 2
 jobs:
-  # build:
-  #   docker:
-  #     - image: circleci/php:7.2-apache-stretch-node-browsers
-  #   steps:
-  #     - checkout
-  #     - run: cd back-end/
-  #     - run: ls
-  #     - run: composer global require laravel/installer
-  #     - run: composer install -n --prefer-dist
-  #     # run tests!      
-  #     - run: ./vendor/bin/phpcs -n --standard=phpcs.xml
-
   deploy:
     machine:
       enabled: true
@@ -27,10 +15,7 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      # - build
       - deploy:
-          # require:
-          #   build
           filters:
             branches:
               only: dev-be
