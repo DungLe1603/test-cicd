@@ -25,13 +25,13 @@ jobs:
 
 workflows:
   version: 2
-  # build-and-deploy:
-  jobs:
-    # - build
-    - deploy:
-        # require:
-        #   build
-        filters:
-          branches:
-            only: dev-be
+  build-and-deploy:
+    jobs:
+      # - build
+      - deploy:
+          # require:
+          #   build
+          filters:
+            branches:
+              only: dev-be
 
