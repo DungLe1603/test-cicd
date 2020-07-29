@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: ls
-      - run: cd ~/back-end
+      - run: cd back-end/
       - run: composer install -n --prefer-dist
       # run tests!      
       - run: ./vendor/bin/phpcs -n --standard=phpcs.xml
