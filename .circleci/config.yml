@@ -4,24 +4,12 @@ jobs:
     docker:
       - image: circleci/php:7.2-apache-stretch-node-browsers
 
-      - image: circleci/mysql:5.7.18
-        environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_ROOT_PASSWORD: ''
-          MYSQL_DATABASE: circle_test
-
-    working_directory: ~/internship_07_2020
-
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       
       # Install PHP Extension
       - run: sudo apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng-dev && sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && sudo docker-php-ext-install -j$(nproc) gd pdo_mysql 
       # - run: sudo docker-php-ext-install gd
-      
-      - run: cp .env.circle .env
 
       # Download and cache dependencies
       # Composer
@@ -36,9 +24,6 @@ jobs:
           key: composer-{{ checksum "composer.json" }}
           paths:
             - vendor
-      
-      - run: chmod -R 777 storage
-      - run: php artisan migrate
       # run tests!
 
   deploy:
@@ -57,8 +42,10 @@ workflows:
   build-and-deploy:
     jobs:
       - build
-      - deploy:
-          filters:
-            branches:
-              only: dev-be
+      # - deploy:
+      #     require:
+      #       build
+      #     filters:
+      #       branches:
+      #         only: dev-be
 
