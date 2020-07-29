@@ -21,7 +21,7 @@ jobs:
             - "ae:71:d5:92:8f:cd:dd:6f:0f:d1:14:ae:fe:fe:70:27"
       - run:
           name: Deploy Over SSH
-          command: ssh -tt rsa_dungle@35.240.201.198 "cd /var/www/intern/back-end && ls"
+          command: ssh -tt rsa_dungle@35.240.201.198 "cd /var/www/intern/ && ls"
 
 workflows:
   version: 2
