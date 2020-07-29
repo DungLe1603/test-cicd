@@ -21,17 +21,17 @@ jobs:
             - "ae:71:d5:92:8f:cd:dd:6f:0f:d1:14:ae:fe:fe:70:27"
       - run:
           name: Deploy Over SSH
-          command: ssh -tt rsa_dungle@35.240.201.198 "cd /var/www/intern/back-end && bash ./build.sh"
+          command: ssh -tt rsa_dungle@35.240.201.198 "cd /var/www/intern/back-end && ls"
 
 workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
-      # - deploy:
-      #     require:
-      #       build
-      #     filters:
-      #       branches:
-      #         only: dev-be
+      # - build
+      - deploy:
+          # require:
+          #   build
+          filters:
+            branches:
+              only: dev-be
 
